@@ -1,10 +1,14 @@
-
+import Header from "../../components/header/Header"
 
 function Home() {
 
 
   return (
-    <div>home</div>
+    <div>
+      <Header />
+      <h1>Home</h1>
+      
+    </div>
   )
 }
 
