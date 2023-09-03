@@ -25,7 +25,7 @@ function LoginForm () {
   const [message, setMessage] = useState<string>('')
   const [token, setToken] = useState<string>('')
 
-
+console.log(token)
   async function handleLogin () {
     const url = 'https://fk7zu3f4gj.execute-api.eu-north-1.amazonaws.com/auth/login'
     const settings = {
