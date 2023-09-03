@@ -1,2 +1,19 @@
 
 
+.showQuiz {
+
+  &__container {
+    max-width: 500px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+
+  &__title {
+   
+  }
+}
+
