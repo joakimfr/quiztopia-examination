@@ -1,0 +1,25 @@
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem 2rem;
+  background-color: grey;
+
+
+
+
+
+  &__ul {
+    display: flex;
+    list-style-type: none;
+    gap: 2rem;
+   
+  }
+
+  &__li {
+   cursor: pointer;
+
+}
+}

@@ -1,3 +1,4 @@
+import Header from "../../components/header/Header"
 import LoginForm from "../../components/loginForm/LoginForm"
 
 
@@ -5,9 +6,10 @@ function Login () {
 
   return (
     <div>
-      <LoginForm />
+      <Header />
       <h1>Log in</h1>
-    </div>
+      <LoginForm />
+      </div>
   )
 }
 
