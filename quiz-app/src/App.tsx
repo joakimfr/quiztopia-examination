@@ -3,7 +3,7 @@ import Home from './views/home/Home'
 import Login from './views/login/Login'
 import Register from './views/register/Register'
 import './App.css'
-import CreateQuiz from './views/createQuiz/CreateQuiz'
+import Quiz from './views/quiz/Quiz'
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
 
     {
       path: '/quiz',
-      element: <CreateQuiz />
+      element: <Quiz />
     }
   ])
     

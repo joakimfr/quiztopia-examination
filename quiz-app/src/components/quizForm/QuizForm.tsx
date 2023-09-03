@@ -36,18 +36,18 @@ console.log(quiz)
   
       if (response.ok) {
         if (responseData.success) {
-          // Quiz skapat framgångsrikt, responseData.quizId innehåller det skapade quizets ID
+        
           console.log('Quiz skapat:', responseData.quizId);
         } else {
-          // Quiz-skapande misslyckades, hantera fel här om det behövs
+         
           console.error('Quiz skapande misslyckades:', responseData.error);
         }
       } else {
-        // Hantera fel här om det inte är en ok-status från servern
+      
         console.error('Något gick fel:', response.status, responseData);
       }
     } catch (error) {
-      // Hantera eventuella nätverks- eller andra fel här
+     
       console.error('Något gick fel:', error);
     }
   }

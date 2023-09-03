@@ -2,7 +2,7 @@ import Header from "../../components/header/Header"
 import QuizForm from "../../components/quizForm/QuizForm"
 import MapBox from "../../components/mapBox/MapBox"
 
-function CreateQuiz () {
+function Quiz () {
 
 
 
@@ -18,4 +18,4 @@ function CreateQuiz () {
 
 }
 
-export default CreateQuiz
+export default Quiz
