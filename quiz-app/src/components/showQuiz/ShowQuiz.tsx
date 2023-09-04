@@ -2,7 +2,6 @@ import { useState } from 'react';
 import MapBox from '../mapBox/MapBox';
 import './ShowQuiz.scss'
 
-
 interface ApiQuiz {
   questions: {
     question: string;
@@ -17,37 +16,16 @@ interface ApiQuiz {
   userId: string;
 }
 
-interface ApiQuizResponse {
-  success: boolean;
+interface ShowQuizProps {
   quizzes: ApiQuiz[];
+  handleGetQuiz: () => void; 
+  handleSelectQuiz: (quiz: ApiQuiz) => void; 
 }
 
 
-function ShowQuiz () {
-
-  const [quizzes, setQuizzes] = useState<ApiQuiz[]>([]);
-  const [selectedQuiz, setSelectedQuiz] = useState<ApiQuiz[]>([]);
-  console.log(selectedQuiz)
-
-console.log(quizzes)
-
-  async function handleGetQuiz () {
-    const url = 'https://fk7zu3f4gj.execute-api.eu-north-1.amazonaws.com/quiz'
-
-    const response = await fetch(url)
-    const data: ApiQuizResponse = await response.json();
-    
-    if ( data.success ) {
-      setQuizzes(data.quizzes);
-
-    } else {
-      console.log('Kunde inte hämta data')
-    }
-  }
-
-  const handleSelectQuiz = (quiz: ApiQuiz) => {
-    setSelectedQuiz(quiz);
-  };
+function ShowQuiz ( {quizzes, handleGetQuiz, handleSelectQuiz}: ShowQuizProps ) {
+//console.log(quizzes)
+  
 
 
   return (

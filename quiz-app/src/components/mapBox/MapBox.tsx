@@ -9,7 +9,7 @@ console.log('Kontrollera att access token hittas: ', import.meta.env.VITE_MAPBOX
 
 
 
-function MapBox (){
+function MapBox ( {selectedQuiz }){
 
   const mapContainer = useRef(null)
 	const mapRef = useRef<MapGl | null>(null)
