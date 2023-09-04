@@ -3,8 +3,7 @@ import mapboxgl, { Map as MapGl } from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapBox.scss'
 
-//mapboxgl.accessToken = 'pk.eyJ1Ijoiam9ha2ltZnIiLCJhIjoiY2xtM2NraDF4M3hyNTNxcGVoY3R3YWVxbCJ9.86kYZBvaATC5c2ZbfVTczQ'
-//console.log('Kontrollera att access token hittas: ', accessToken);
+
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN as string
 console.log('Kontrollera att access token hittas: ', import.meta.env.VITE_MAPBOX_TOKEN);
 

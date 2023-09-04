@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import MapBox from '../mapBox/MapBox';
 import './ShowQuiz.scss'
 
 
@@ -25,6 +26,8 @@ interface ApiQuizResponse {
 function ShowQuiz () {
 
   const [quizzes, setQuizzes] = useState<ApiQuiz[]>([]);
+  const [selectedQuiz, setSelectedQuiz] = useState<ApiQuiz[]>([]);
+  console.log(selectedQuiz)
 
 console.log(quizzes)
 
@@ -42,7 +45,9 @@ console.log(quizzes)
     }
   }
 
-
+  const handleSelectQuiz = (quiz: ApiQuiz) => {
+    setSelectedQuiz(quiz);
+  };
 
 
   return (
@@ -56,10 +61,12 @@ console.log(quizzes)
           <div key={index}>
             <h3>Skapat av: {quiz.username}</h3>
             <h4>Quizet heter: {quiz.quizId}</h4>
+            <button onClick={() => handleSelectQuiz(quiz)}>Välj Quiz</button>
           </div>
         ))}
 
       </section>
+  
     </div>
   )
 }
