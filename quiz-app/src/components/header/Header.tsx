@@ -23,10 +23,8 @@ function Header () {
           </ul>
         </nav>
         {isLoggedIn ? (
-          // Visa loggutknappen om användaren är inloggad
-          <button className="header__button" onClick={logout}>Logga ut</button>
-        ) : (
-          // Annars visa inloggningsknappen
+         <button className="header__button" onClick={logout}>Logga ut</button>
+        ):(
           <button className="header__button" onClick={() => handleNavigate('/login')}>Logga in</button>
         )}
       </header>

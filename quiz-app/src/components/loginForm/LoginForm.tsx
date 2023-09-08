@@ -11,7 +11,7 @@ interface ApiLoginResponse {
 
 function LoginForm () {
 
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn } = useAuth();
   const navigate = useNavigate();
  
   const [username, setUsername] = useState<string>('')
