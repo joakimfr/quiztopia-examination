@@ -1,0 +1,46 @@
+.form {
+  margin: 5rem auto;
+  background-color: $secondaryColor;
+  max-width: 500px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 8px;
+
+  &__title {
+    font-family: $titleText;
+    color: #ffffff;
+  }
+
+  &__input {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    
+  }
+
+  &__input:focus {
+    border-color: #6FC6FF;
+    box-shadow: 0 0 5px rgba(111, 198, 255, 0.7);
+  }
+  
+  /* Placeholder-text */
+  &__input::placeholder {
+    color: #999999;
+  }
+
+  &__button {
+    background-color: #ffffff;
+    width: 150px;
+    height: 30px;
+    border-radius: 15px;
+    border-style: none;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+  }
+}

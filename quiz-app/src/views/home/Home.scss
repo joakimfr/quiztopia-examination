@@ -1,0 +1,74 @@
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+.home {
+  height: 100vh;
+  background-color: #222222;
+
+
+  &__section {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+  
+   
+  
+   
+  }
+
+  &__title {
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    color: #ffffff;
+    text-align: center;
+    margin: 3rem 0rem;
+  }
+
+  &__describe {
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    color: #ffffff;
+    text-align: center;
+    max-width: 400px;
+    
+  }
+
+  &__container {
+    margin: 5rem 0rem;
+    display: flex;
+    justify-content: space-around;
+    gap: 5rem;
+    
+  }
+
+  &__text {
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__button {
+    background-color: #6FC6FF;
+    width: 150px;
+    height: 30px;
+    border-radius: 15px;
+    border-style: none;
+    font-family: 'Fira Sans Extra Condensed', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+  }
+}
+
+

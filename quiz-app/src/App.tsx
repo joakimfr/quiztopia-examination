@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { AuthProvider } from './hooks/useAuth'
 import Home from './views/home/Home'
 import Login from './views/login/Login'
 import Register from './views/register/Register'
@@ -36,7 +37,9 @@ function App() {
 
   return (
     <div>
-      <RouterProvider router={ router } />
+      <AuthProvider>
+        <RouterProvider router={ router } />
+      </AuthProvider>
     </div>
   )
 }

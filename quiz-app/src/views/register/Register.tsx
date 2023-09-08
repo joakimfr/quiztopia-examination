@@ -1,14 +1,14 @@
 import Header from "../../components/header/Header"
 import RegisterForm from "../../components/registerForm/RegisterForm"
+import './Register.scss'
 
 RegisterForm
 
 function Register () {
 
   return (
-    <div>
+    <div className="register">
       <Header />
-      <h1>Register</h1>
       <RegisterForm />
     </div>
   )

@@ -1,7 +1,11 @@
 
+.mapbox {
+  max-width: 500px;
 
+  &__map {
+    height: 300px;
+    width: 500px;
+  }
 
-.map-container {
-	height: 300px;
-  width: 500px;
 }
+

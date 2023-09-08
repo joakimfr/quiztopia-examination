@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import MapBox from '../mapBox/MapBox';
+import { useAuth } from '../../hooks/useAuth';
+import { useState, useEffect } from 'react'
 import './ShowQuiz.scss'
 
 interface ApiQuiz {
@@ -18,32 +18,52 @@ interface ApiQuiz {
 
 interface ShowQuizProps {
   quizzes: ApiQuiz[];
-  handleGetQuiz: () => void; 
+  quizzesFromUser: ApiQuiz[]
   handleSelectQuiz: (quiz: ApiQuiz) => void; 
+  handleDeleteQuiz: (quizId: string) => void;
 }
 
 
-function ShowQuiz ( {quizzes, handleGetQuiz, handleSelectQuiz}: ShowQuizProps ) {
-//console.log(quizzes)
-  
+function ShowQuiz ( {quizzes, quizzesFromUser, handleDeleteQuiz, handleSelectQuiz}: ShowQuizProps ) {
 
+  const { isLoggedIn } = useAuth();
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(isLoggedIn);
 
-  return (
-    <div className='showQuiz'>
-      <section className='showQuiz__container'>
-        <h2 className='showQuiz__title'>Tillängliga Quiz</h2>
-        <button onClick={handleGetQuiz}>Visa quiz</button>  
+  useEffect(() => {
+    setUserIsLoggedIn(isLoggedIn);
+  }, [isLoggedIn]);
 
-              
-               {quizzes.map((quiz, index) => ( // Eventuellt byta ut index mot quizId för att kunna få infomration när det klickas
-          <div key={index}>
-            <h3>Skapat av: {quiz.username}</h3>
-            <h4>Quizet heter: {quiz.quizId}</h4>
-            <button onClick={() => handleSelectQuiz(quiz)}>Välj Quiz</button>
+return (
+    <div className='showquiz'>
+      {userIsLoggedIn && (
+         <article className='showquiz__user'>
+        <h2 className='showquiz__title'>Dina Quiz</h2>
+        <div className='showquiz__content'>
+      {quizzesFromUser.map((quiz, index) => (
+          <div className='showquiz__info' key={index}>
+            <h3 className='showquiz__text'>Skapat av: {quiz.username}</h3>
+            <h4 className='showquiz__text'>Quizet heter: {quiz.quizId}</h4>
+            <button className='showquiz__button' onClick={() => handleSelectQuiz(quiz)}>välj Quiz</button>
+            <button onClick={() => handleDeleteQuiz(quiz.quizId)}>Ta bort</button>
+            
           </div>
         ))}
-
-      </section>
+        </div>
+        </article>
+      )}
+      <article className='showquiz__allusers'>
+        <h2 className='showquiz__title'>Användares Quiz</h2>
+         <div className='showquiz__content'>
+         {quizzes.map((quiz, index) => ( // Eventuellt byta ut index mot quizId för att kunna få infomration när det klickas
+          <div className='showquiz__info' key={index}>
+            <h3 className='showquiz__text'>Skapat av: {quiz.username}</h3>
+            <h4 className='showquiz__text'>Quizet heter: {quiz.quizId}</h4>
+            <button className='showquiz__button' onClick={() => handleSelectQuiz(quiz)}>Välj Quiz</button>
+          </div>
+        ))}
+        </div>
+      </article>
+   
   
     </div>
   )
