@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import mapboxgl, { Map as MapGl } from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './MapBox.scss'
+import { useAuth } from '../../hooks/useAuth';
 
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN as string
 
@@ -34,6 +35,14 @@ function MapBox ({ selectedQuiz, handleMapClick }: MapBoxProps){
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const [questionCoords, setQuestionCoords] = useState<[number, number][] | null>(null);
 
+  const { isLoggedIn } = useAuth();
+  const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(isLoggedIn);
+
+
+  useEffect(() => {
+    setUserIsLoggedIn(isLoggedIn);
+  }, [isLoggedIn]);
+
   useEffect(() => {
     if (mapRef.current || !mapContainer.current) return;
 
@@ -45,15 +54,17 @@ function MapBox ({ selectedQuiz, handleMapClick }: MapBoxProps){
     });
     const map: MapGl = mapRef.current;
 
-    map.on('click', (event) => {   
-      const lngLat = map.unproject(event.point);
-      const clickPosition: [number, number] = [lngLat.lng, lngLat.lat];
-      handleMapClick(clickPosition);
-      
-      markersRef.current.forEach((marker) => marker.remove());
-      const newMarker = new mapboxgl.Marker().setLngLat(clickPosition).addTo(map);
-      markersRef.current = [newMarker];
-    });
+    if (userIsLoggedIn) {
+      map.on('click', (event) => {   
+        const lngLat = map.unproject(event.point);
+        const clickPosition: [number, number] = [lngLat.lng, lngLat.lat];
+        handleMapClick(clickPosition);
+        
+        markersRef.current.forEach((marker) => marker.remove());
+        const newMarker = new mapboxgl.Marker().setLngLat(clickPosition).addTo(map);
+        markersRef.current = [newMarker];
+      });
+    }
 
     map.on('move', () => {
       interface Position {
@@ -66,7 +77,8 @@ function MapBox ({ selectedQuiz, handleMapClick }: MapBoxProps){
       setZoom(map.getZoom());
     });
 
-  }, [lat, lng, zoom, selectedQuiz, handleMapClick]);
+  }, [lat, lng, zoom, selectedQuiz, handleMapClick, userIsLoggedIn]);
+
 
   const showUserLocation = () => {
     if ('geolocation' in navigator) {
@@ -107,20 +119,29 @@ function MapBox ({ selectedQuiz, handleMapClick }: MapBoxProps){
 
   
   
-  useEffect(() => {
+  useEffect(() => { //La till här så att frågorna kommer upp i en pop-up, på kartan när ett quiz klickas
     if (!mapRef.current || !questionCoords) return;
 
-    markersRef.current.forEach((marker) => marker.remove());
-
-    questionCoords.forEach((coords) => {
-      if (mapRef.current) {
-        const newMarker = new mapboxgl.Marker()
-          .setLngLat(coords)
-          .addTo(mapRef.current);
-        markersRef.current.push(newMarker);
-      }
+    const markers = questionCoords.map((coords, index) => {
+      const marker = new mapboxgl.Marker().setLngLat(coords);
+      marker.setPopup(
+        new mapboxgl.Popup({ offset: 25 })
+          .setHTML(`<h3>Fråga ${index + 1}</h3><p>${selectedQuiz?.questions[index].question}</p>`)
+      );
+      return marker;
     });
+
+    markers.forEach((marker) => {
+      marker.addTo(mapRef.current!);
+      marker.togglePopup();
+    });
+
+    return () => {
+      markers.forEach((marker) => marker.remove());
+    };
   }, [questionCoords]);
+
+
 
   return (
     <div>
